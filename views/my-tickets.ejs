@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tickets - <%= username %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>Ticket Booking System</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/my-tickets/1">My Tickets (User 1)</a>
+            <a href="/my-tickets/2">My Tickets (User 2)</a>
+            <a href="/my-tickets/3">My Tickets (User 3)</a>
+        </nav>
+    </header>
+    <main>
+        <h2>My Reservations for <%= username %></h2>
+        
+        <% if(tickets.length === 0) { %>
+            <p>You have no reservations yet.</p>
+        <% } else { %>
+            <table class="ticket-table">
+                <thead>
+                    <tr>
+                        <th>Reservation ID</th>
+                        <th>Concert</th>
+                        <th>Date</th>
+                        <th>Seat</th>
+                        <th>Booked At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% tickets.forEach(ticket => { %>
+                        <tr>
+                            <td>#<%= ticket.reservation_id %></td>
+                            <td><%= ticket.title %></td>
+                            <td><%= new Date(ticket.date).toLocaleString() %></td>
+                            <td><strong><%= ticket.seat_number %></strong></td>
+                            <td><%= new Date(ticket.reservation_time).toLocaleString() %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+    </main>
+</body>
+</html>

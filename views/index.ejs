@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Ticketing</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>Ticket Booking System</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/my-tickets/1">My Tickets (User 1)</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Upcoming Concerts</h2>
+        <div class="concert-list">
+            <% concerts.forEach(concert => { %>
+                <div class="concert-card">
+                    <h3><%= concert.title %></h3>
+                    <p>Date: <%= new Date(concert.date).toLocaleString() %></p>
+                    <p>Available Seats: <%= concert.available_seats %> / <%= concert.total_seats %></p>
+                    <a href="/concert/<%= concert.concert_id %>" class="btn">View Seats & Book</a>
+                </div>
+            <% }) %>
+            <% if(concerts.length === 0) { %>
+                <p>No upcoming concerts.</p>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>

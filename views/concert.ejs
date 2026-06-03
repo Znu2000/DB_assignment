@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Seat - <%= concert.title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>Ticket Booking System</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/my-tickets/1">My Tickets (User 1)</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Book a Seat for: <%= concert.title %></h2>
+        
+        <% if (error) { %>
+            <div class="alert error"><%= error %></div>
+        <% } %>
+        <% if (message) { %>
+            <div class="alert success"><%= message %></div>
+        <% } %>
+
+        <div class="stage">STAGE</div>
+        
+        <div class="seat-map">
+            <% seats.forEach(seat => { %>
+                <div class="seat <%= seat.status.toLowerCase() %>">
+                    <%= seat.seat_number %>
+                    <% if (seat.status === 'AVAILABLE') { %>
+                        <form action="/book" method="POST" style="margin-top:5px;">
+                            <input type="hidden" name="concert_id" value="<%= concert.concert_id %>">
+                            <input type="hidden" name="seat_id" value="<%= seat.seat_id %>">
+                            <select name="user_id" required>
+                                <option value="" disabled selected>Select User</option>
+                                <% users.forEach(user => { %>
+                                    <option value="<%= user.user_id %>"><%= user.username %></option>
+                                <% }) %>
+                            </select>
+                            <button type="submit" class="btn-small">Book</button>
+                        </form>
+                    <% } else { %>
+                        <span class="reserved-tag">Reserved</span>
+                    <% } %>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+</body>
+</html>
