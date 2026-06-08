@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-06-08T07:57:04.408Z",
+  "database": "PostgreSQL",
+  "isolationLevel": "READ COMMITTED (default) with SELECT ... FOR UPDATE",
+  "results": [
+    {
+      "scenario": "Scenario 1: Same Seat Race Condition",
+      "numUsers": 10,
+      "successCount": 1,
+      "failCount": 9,
+      "avgTime": 111,
+      "minTime": 50,
+      "maxTime": 135
+    },
+    {
+      "scenario": "Scenario 2: Throughput Test",
+      "numUsers": 10,
+      "successCount": 10,
+      "totalTimeMs": 19,
+      "tps": 526,
+      "avgTime": 15
+    },
+    {
+      "scenario": "Scenario 3: Mixed Workload",
+      "numRequests": 20,
+      "reads": 7,
+      "writes": 13,
+      "writeSuccess": 10,
+      "totalTimeMs": 22
+    }
+  ]
+}
